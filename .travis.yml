@@ -15,3 +15,11 @@ after_success:
   - docker build -t chucholuco/multi-nginx ./nginx
   - docker build -t chucholuco/multi-server ./server
   - docker build -t chucholuco/multi-worker ./worker
+
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to docker hub
+  - docker push chucholuco/multi-client
+  - docker push chucholuco/multi-nginx
+  - docker push chucholuco/multi-server
+  - docker push chucholuco/multi-worker
